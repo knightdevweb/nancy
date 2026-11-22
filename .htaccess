@@ -1,0 +1,12 @@
+# Route requests to this directory through index.php
+DirectoryIndex index.php index.html
+
+# Serve pretty URLs: /foo -> foo.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/.]+)$ $1.php [L,QSA]
+
+# Redirect legacy .html requests to their .php equivalents
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+?)\.html$ $1.php [R=301,L,QSA]
